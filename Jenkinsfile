@@ -1,25 +1,41 @@
 pipeline {
+
     agent any
 
     stages {
 
-        stage('Build') {
+        stage('Checkout') {
+
             steps {
-                echo 'Building Application...'
+                echo 'Checking out source code...'
             }
+
+        }
+
+        stage('Build') {
+
+            steps {
+                echo 'Building application...'
+            }
+
         }
 
         stage('Test') {
+
             steps {
-                echo 'Running Tests...'
+                echo 'Running tests...'
             }
+
         }
 
         stage('Deploy') {
+
             steps {
-                echo 'Deploying Application...'
+                echo 'Deploying application...'
             }
+
         }
 
     }
+
 }
