@@ -1,41 +1,29 @@
 pipeline {
 
-    agent any
+    agent {
+        label 'linux'
+    }
 
     stages {
 
-        stage('Checkout') {
-
+        stage('Who Am I') {
             steps {
-                echo 'Checking out source code...'
+                sh 'hostname'
+                sh 'whoami'
             }
-
         }
 
-        stage('Build') {
-
+        stage('Java Version') {
             steps {
-                echo 'Building application...'
+                sh 'java -version'
             }
-
         }
 
-        stage('Test') {
-
+        stage('Workspace') {
             steps {
-                echo 'Running tests...'
+                sh 'pwd'
+                sh 'ls -la'
             }
-
         }
-
-        stage('Deploy') {
-
-            steps {
-                echo 'Deploying application...'
-            }
-
-        }
-
     }
-
 }
