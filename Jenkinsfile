@@ -3,16 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Agent1 Build') {
-            agent { label 'agent1' }
-
+        stage('Checkout') {
+            agent { label 'built-in' }   // or your controller label
             steps {
-                sh 'hostname'
-                sh 'java -version'
-                sh 'git --version'
+                checkout scm
             }
         }
 
+        stage('Agent1 Build') {
+            agent { label 'agent1' }
+            steps {
+                sh 'hostname'
+		sh 'java -version'
+		sh 'git --version'
+            }
+        }
         stage('Agent2 Test') {
             agent { label 'agent2' }
 
@@ -21,6 +26,5 @@ pipeline {
                 sh 'uptime'
             }
         }
-
     }
 }
