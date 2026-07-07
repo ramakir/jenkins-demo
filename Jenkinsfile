@@ -1,29 +1,26 @@
 pipeline {
-
-    agent {
-        label 'linux'
-    }
+    agent none
 
     stages {
 
-        stage('Who Am I') {
+        stage('Agent1 Build') {
+            agent { label 'agent1' }
+
             steps {
                 sh 'hostname'
-                sh 'whoami'
-            }
-        }
-
-        stage('Java Version') {
-            steps {
                 sh 'java -version'
+                sh 'git --version'
             }
         }
 
-        stage('Workspace') {
+        stage('Agent2 Test') {
+            agent { label 'agent2' }
+
             steps {
-                sh 'pwd'
-                sh 'ls -la'
+                sh 'hostname'
+                sh 'uptime'
             }
         }
+
     }
 }
